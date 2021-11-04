@@ -8,7 +8,7 @@ from odoo.http import request
 class InvoiceInfoApi(http.Controller):
     @http.route('/invoice-info-api/', methods=['GET'], type='http', csrf=False, auth="public")
     def index(self, invoice_no):
-        invoice = http.request.env['account.move'].search([('name', '=', invoice_no)])
+        invoice = http.request.env['account.move'].sudo().search([('name', '=', invoice_no)])
         if invoice:
             data = {"status": True,
                     "name": invoice['name'],
